@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Click Game</title>
+  <style>
+    .box {
+      width: 100px;
+      height: 100px;
+      background-color: red;
+      display: inline-block;
+      margin: 10px;
+    }
+  </style>
+</head>
+<body>
+  <h1>Click Game</h1>
+  <p>Click the boxes as fast as you can!</p>
+  <div id="box-container"></div>
+  <p>Your time: <span id="time">0</span> seconds</p>
+
+  <script>
+    // Create an array of box elements
+    var boxes = [];
+    for (var i = 0; i < 10; i++) {
+      var box = document.createElement("div");
+      box.className = "box";
+      box.onclick = function() { handleClick(this); };
+      document.getElementById("box-container").appendChild(box);
+      boxes.push(box);
+    }
+
+    // Start the game timer
+    var startTime = Date.now();
+    setInterval(function() {
+      var elapsedTime = (Date.now() - startTime) / 1000;
+      document.getElementById("time").innerHTML = elapsedTime.toFixed(1);
+    }, 100);
+
+    // Handle box clicks
+    var score = 0;
+    function handleClick(box) {
+      box.style.display = "none";
+      score++;
+      if (score == boxes.length) {
+        alert("Game over! Your time: " + document.getElementById("time").innerHTML + " seconds");
+      }
+    }
+  </script>
+</body>
+</html>
